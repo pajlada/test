@@ -15,3 +15,6 @@ jobs:
 
     - uses: pajlada/test-github-action@master
       id: review
+
+    - uses: pajlada/test-github-action/post_comments@master
+      id: review
