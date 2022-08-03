@@ -13,4 +13,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: View context attributes
+      uses: actions/github-script@v6
+      with:
+        script: console.log(context)
+
     - uses: pajlada/test-github-action/post_comments@master
