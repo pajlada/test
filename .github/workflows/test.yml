@@ -1,5 +1,11 @@
 name: clang-tidy-review
 
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
 jobs:
   build:
     runs-on: ubuntu-latest
