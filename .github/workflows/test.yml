@@ -18,3 +18,8 @@ jobs:
 
     - uses: pajlada/test-github-action@master
       id: review
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: clang-tidy-review
+        path: clang_tidy_review.yaml
