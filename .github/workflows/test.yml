@@ -8,9 +8,6 @@ on:
 
 jobs:
   build:
-    outputs:
-      test: ${{ steps.review.outputs.test }}
-
     runs-on: ubuntu-latest
 
     steps:
@@ -18,6 +15,8 @@ jobs:
 
     - uses: pajlada/test-github-action@master
       id: review
+      with:
+        post_comments: false
 
     - uses: actions/upload-artifact@v3
       with:
