@@ -8,6 +8,9 @@ on:
 
 jobs:
   build:
+    outputs:
+      test: ${{ steps.review.outputs.test }}
+
     runs-on: ubuntu-latest
 
     steps:
