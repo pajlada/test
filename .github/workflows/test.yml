@@ -1,0 +1,14 @@
+name: clang-tidy-review
+
+# You can be more specific, but it currently only works on pull requests
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: pajlada/test-github-action@master
+      id: review
