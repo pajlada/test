@@ -36,4 +36,7 @@ jobs:
 
     - run: unzip clang-tidy-review.zip
 
+    - name: tree
+      run: find .
+
     - uses: pajlada/test-github-action/post_comments@master
