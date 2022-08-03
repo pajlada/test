@@ -18,6 +18,7 @@ jobs:
       with:
         script: |
           console.log(context);
-          console.log(toJSON(needs));
+          console.log(needs);
+          console.log(JSON.stringify(needs));
 
     - uses: pajlada/test-github-action/post_comments@master
