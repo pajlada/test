@@ -17,15 +17,9 @@ jobs:
       - run: |
           git status
           echo "--------"
-          git show-ref
+          git log HEAD
           echo "--------"
-          git reflog pull/6/merge
-          echo "--------"
-          git reflog
-          echo "--------"
-          git reflog HEAD
-          echo "--------"
-          git reflog origin/master
+          git log origin/master
           echo "--------"
           git diff origin/master CHANGELOG.md
 
