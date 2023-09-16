@@ -17,6 +17,7 @@ jobs:
       - uses: actions/github-script@v6
         id: label-checker
         with:
+          result-encoding: "string"
           script: |
             const response = await github.rest.issues.listLabelsOnIssue({
               issue_number: context.payload.pull_request.number,
