@@ -24,13 +24,10 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo
             });
-            const labels = new Set(response.data.map(label => label.name))
-            console.log(labels);
-
-            if (labels.has("skip-changelog-checker")) {
-              console.log("skipping");
+            if (new Set(response.data.map(label => label.name)).has("skip-changelog-checker")) {
               return "skip";
             }
+            return "";
 
       - uses: pajlads/changelog-checker@master
         if: steps.label-checker.outputs.result != 'skip'
