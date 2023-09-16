@@ -23,5 +23,7 @@ jobs:
           git reflog HEAD
           echo "--------"
           git reflog origin/master
+          echo "--------"
+          git diff origin/master CHANGELOG.md
 
       - uses: pajlads/changelog-checker@master
