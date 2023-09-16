@@ -9,4 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - run: |
+          git status
+          echo "--------"
+          git reflog origin/master
+          echo "--------"
+          git reflog
+
       - uses: pajlads/changelog-checker@master
