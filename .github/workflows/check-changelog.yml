@@ -12,8 +12,8 @@ jobs:
       - run: |
           git status
           echo "--------"
-          git reflog origin/master
-          echo "--------"
           git reflog
+          echo "--------"
+          git reflog origin/master
 
       - uses: pajlads/changelog-checker@master
