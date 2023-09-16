@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0
 
       - run: |
-          docker run --workdir /github/workspace --rm ghcr.io/pajlads/changelog-checker:master ls -la
+          docker run --workdir /github/workspace --rm -v "/home/runner/work/test/test":"/github/workspace" ghcr.io/pajlads/changelog-checker:master ls -la
 
       - run: |
           git status
