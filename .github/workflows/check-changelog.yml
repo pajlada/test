@@ -1,0 +1,16 @@
+---
+name: Changelog Checker
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  changelog-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pajlads/changelog-checker@master
