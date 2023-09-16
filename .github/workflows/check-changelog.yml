@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0
 
       - run: |
-          docker run ghcr.io/pajlads/changelog-checker:master
+          docker run ghcr.io/pajlads/changelog-checker:master ls -la
 
       - run: |
           git status
