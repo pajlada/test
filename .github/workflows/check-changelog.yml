@@ -12,6 +12,9 @@ jobs:
           fetch-depth: 0
 
       - run: |
+          docker run --rm -it ghcr.io/pajlads/changelog-checker:master
+
+      - run: |
           git status
           echo "--------"
           git show-ref
