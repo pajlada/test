@@ -24,9 +24,10 @@ jobs:
               repo: context.repo.repo
             });
             const labels = new Set(response.data.map(label => label.name))
-            console.log(`Found labels: ${labels}`);
+            console.log(labels);
 
             if (labels.has("skip-changelog-checker")) {
+              console.log("skipping");
               return "skip";
             }
 
