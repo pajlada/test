@@ -12,6 +12,8 @@ jobs:
       - run: |
           git status
           echo "--------"
+          git reflog pull/6/merge
+          echo "--------"
           git reflog
           echo "--------"
           git reflog origin/master
