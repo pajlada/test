@@ -12,9 +12,13 @@ jobs:
       - run: |
           git status
           echo "--------"
+          git show-ref
+          echo "--------"
           git reflog pull/6/merge
           echo "--------"
           git reflog
+          echo "--------"
+          git reflog HEAD
           echo "--------"
           git reflog origin/master
 
