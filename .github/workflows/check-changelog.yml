@@ -7,20 +7,4 @@ jobs:
   changelog-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - run: |
-          docker run --workdir /github/workspace --rm -v "/home/runner/work/test/test":"/github/workspace" ghcr.io/pajlads/changelog-checker:master ls -la
-
-      - run: |
-          git status
-          echo "--------"
-          git log HEAD
-          echo "--------"
-          git log origin/master
-          echo "--------"
-          git diff origin/master CHANGELOG.md
-
       - uses: pajlads/changelog-checker@master
