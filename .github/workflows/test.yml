@@ -7,18 +7,26 @@ on:
   pull_request:
 
 jobs:
-  build:
+  build-ubuntu-docker:
+    name: "Build TEST DOCKER IMAGE"
     runs-on: ubuntu-latest
+    container: ghcr.io/chatterino/chatterino2-build-ubuntu-20.04:latest
+    strategy:
+      matrix:
+        include:
+          # Ubuntu 20.04, Qt 5.12
+          - os: ubuntu-20.04
+            qt-version: 6.6.1
+            force-lto: false
+            plugins: false
+            skip-artifact: false
+            skip-crashpad: false
+    env:
+      C2_ENABLE_LTO: ${{ matrix.force-lto }}
 
     steps:
-    - uses: actions/checkout@v2
-
-    - uses: pajlada/test-github-action@master
-      id: review
-      with:
-        post_comments: false
-
-    - uses: actions/upload-artifact@v3
-      with:
-        name: clang-tidy-review
-        path: clang_tidy_review.yaml
+      - name: Enable plugin support
+        if: matrix.plugins
+        run: |
+          echo "C2_PLUGINS=ON" >> "$GITHUB_ENV"
+        shell: bash

@@ -29,5 +29,5 @@ jobs:
             }
             return "";
 
-      - uses: pajlads/changelog-checker@master
+      - uses: pajlads/changelog-checker@v1.0.0
         if: steps.label-checker.outputs.result != 'skip'
