@@ -10,7 +10,6 @@ jobs:
   build-ubuntu-docker:
     name: "Build TEST DOCKER IMAGE"
     runs-on: ubuntu-latest
-    container: ghcr.io/chatterino/chatterino2-build-ubuntu-20.04:latest
     strategy:
       matrix:
         include:
@@ -25,8 +24,5 @@ jobs:
       C2_ENABLE_LTO: ${{ matrix.force-lto }}
 
     steps:
-      - name: Enable plugin support
-        if: matrix.plugins
-        run: |
-          echo "C2_PLUGINS=ON" >> "$GITHUB_ENV"
-        shell: bash
+      - name: xd
+        run: echo "xd"
