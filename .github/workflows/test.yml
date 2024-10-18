@@ -25,4 +25,6 @@ jobs:
 
     steps:
       - name: xd
-        run: echo "xd"
+        run: |
+          docker run -p 9051:9051 --detach ghcr.io/chatterino/chatterino2-test-httpbox:latest
+          echo "xd"
