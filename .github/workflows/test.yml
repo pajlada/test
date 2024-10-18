@@ -28,3 +28,13 @@ jobs:
         run: |
           docker run -p 9051:9051 --detach ghcr.io/chatterino/chatterino2-test-httpbox:latest
           echo "xd"
+
+  test-windows:
+    name: "Test Windwows"
+    runs-on: windows-latest
+
+    steps:
+      - name: Test
+        run: |
+          docker run -p 9051:3000 --detach ghcr.io/chatterino/chatterino2-test-httpbox:latest
+          curl https://127.0.0.1:9051/headers
