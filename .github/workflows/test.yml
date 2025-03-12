@@ -7,18 +7,34 @@ on:
   pull_request:
 
 jobs:
-  build:
+  build-ubuntu-docker:
+    name: "Build TEST DOCKER IMAGE"
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          # Ubuntu 20.04, Qt 5.12
+          - os: ubuntu-20.04
+            qt-version: 6.6.1
+            force-lto: false
+            plugins: false
+            skip-artifact: false
+            skip-crashpad: false
+    env:
+      C2_ENABLE_LTO: ${{ matrix.force-lto }}
 
     steps:
-    - uses: actions/checkout@v2
+      - name: xd
+        run: |
+          docker run -p 9051:9051 --detach ghcr.io/chatterino/chatterino2-test-httpbox:latest
+          echo "xd"
 
-    - uses: pajlada/test-github-action@master
-      id: review
-      with:
-        post_comments: false
+  test-windows:
+    name: "Test Windwows"
+    runs-on: windows-latest
 
-    - uses: actions/upload-artifact@v3
-      with:
-        name: clang-tidy-review
-        path: clang_tidy_review.yaml
+    steps:
+      - name: Test
+        run: |
+          docker run -p 9051:3000 --detach ghcr.io/chatterino/chatterino2-test-httpbox:latest
+          curl https://127.0.0.1:9051/headers
