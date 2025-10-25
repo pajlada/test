@@ -7,5 +7,3 @@ asd
 asd
 
 dsfgggg
-
-lol
