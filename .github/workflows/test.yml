@@ -16,4 +16,5 @@ jobs:
     - uses: actions/github-script@v8
       with:
         script: |
+          core.notice('hmm');
           core.setFailed('hi this is the error message');
