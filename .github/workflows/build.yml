@@ -46,16 +46,20 @@ jobs:
       - name: Check build type
         id: build-type
         run: |
-          if [ "$CHATTERINO_BUILD_TYPE" = "auto" ]; then
+          echo "Chatterino build type: aaaaa '${CHATTERINO_BUILD_TYPE}' bbbbbb"
+          if [ "${CHATTERINO_BUILD_TYPE}" = "auto" ]; then
             if git describe --exact-match --match 'v*'; then
               echo "NIGHTLY_BUILD=On" >> "$GITHUB_OUTPUT"
             else
               echo "NIGHTLY_BUILD=Off" >> "$GITHUB_OUTPUT"
             fi
-          elif [ "$CHATTERINO_BUILD_TYPE" = "nightly" ]; then
+          elif [ "${CHATTERINO_BUILD_TYPE}" = "nightly" ]; then
             echo "NIGHTLY_BUILD=On" >> "$GITHUB_OUTPUT"
-          elif [ "$CHATTERINO_BUILD_TYPE" = "stable" ]; then
+          elif [ "${CHATTERINO_BUILD_TYPE}" = "stable" ]; then
             echo "NIGHTLY_BUILD=Off" >> "$GITHUB_OUTPUT"
+          else
+            echo "no chatterino build type variable set"
+            exit 1
           fi
 
       - name: forsen
