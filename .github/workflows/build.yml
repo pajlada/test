@@ -44,5 +44,20 @@ jobs:
           git config --global --add safe.directory '*'
 
       - name: Check build type
+        id: build-type
         run: |
-          echo "aaaaaaaa '$CHATTERINO_BUILD_TYPE' bbbbbbb"
+          if [ "$CHATTERINO_BUILD_TYPE" = "auto" ]; then
+            if git describe --exact-match --match 'v*'; then
+              echo "NIGHTLY_BUILD=On" >> "$GITHUB_OUTPUT"
+            else
+              echo "NIGHTLY_BUILD=Off" >> "$GITHUB_OUTPUT"
+            fi
+          elif [ "$CHATTERINO_BUILD_TYPE" = "nightly" ]; then
+            echo "NIGHTLY_BUILD=On" >> "$GITHUB_OUTPUT"
+          elif [ "$CHATTERINO_BUILD_TYPE" = "stable" ]; then
+            echo "NIGHTLY_BUILD=Off" >> "$GITHUB_OUTPUT"
+          fi
+
+        - name: forsen
+          run: |
+            echo "build type nightly build: ${{ steps.build-type.NIGHTLY_BUILD }} xD"
