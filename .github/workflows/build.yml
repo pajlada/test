@@ -1,0 +1,48 @@
+---
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+      - "bugfix-release/*"
+      - "release/*"
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      buildType:
+        description: "Build type"
+        required: true
+        type: choice
+        default: "auto"
+        options:
+          - auto
+          - nightly
+          - stable
+  merge_group:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CHATTERINO_BUILD_TYPE: ${{ case(inputs.buildType, inputs.buildType, 'auto') }}
+
+jobs:
+  XD:
+    name: "XD"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: recursive
+          fetch-depth: 0 # allows for tags access
+
+      - name: Fix git permission error
+        run: |
+          git config --global --add safe.directory '*'
+
+      - name: Check build type
+        run: |
+          echo "aaaaaaaa '${{ $CHATTERINO_BUILD_TYPE }}' bbbbbbb"
