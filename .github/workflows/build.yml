@@ -58,6 +58,6 @@ jobs:
             echo "NIGHTLY_BUILD=Off" >> "$GITHUB_OUTPUT"
           fi
 
-        - name: forsen
-          run: |
-            echo "build type nightly build: ${{ steps.build-type.NIGHTLY_BUILD }} xD"
+      - name: forsen
+        run: |
+          echo "build type nightly build: ${{ steps.build-type.NIGHTLY_BUILD }} xD"
