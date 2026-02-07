@@ -1,0 +1,74 @@
+---
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+      - "bugfix-release/*"
+      - "release/*"
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      buildType:
+        description: "Build type"
+        required: true
+        type: choice
+        default: "auto"
+        options:
+          - auto
+          - nightly
+          - stable
+  merge_group:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CHATTERINO_BUILD_TYPE: ${{ case(inputs.buildType != '', inputs.buildType, 'auto') }}
+
+jobs:
+  XD:
+    name: "XD"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: recursive
+          fetch-depth: 0 # allows for tags access
+
+      - name: Fix git permission error
+        run: |
+          git config --global --add safe.directory '*'
+
+      - name: Check build type
+        id: build-type
+        shell: bash
+        run: |
+          if [ "${CHATTERINO_BUILD_TYPE}" = "auto" ]; then
+            if git describe --exact-match --match 'v*'; then
+              echo "Auto - found release tag format"
+              echo "NIGHTLY_BUILD=On" >> "$GITHUB_OUTPUT"
+            else
+              echo "Auto - did not find release tag format"
+              echo "NIGHTLY_BUILD=Off" >> "$GITHUB_OUTPUT"
+            fi
+          elif [ "${CHATTERINO_BUILD_TYPE}" = "nightly" ]; then
+            echo "Override to nightly"
+            echo "NIGHTLY_BUILD=On" >> "$GITHUB_OUTPUT"
+          elif [ "${CHATTERINO_BUILD_TYPE}" = "stable" ]; then
+            echo "Override to stable"
+            echo "NIGHTLY_BUILD=Off" >> "$GITHUB_OUTPUT"
+          else
+            echo "Error: no build type variable set"
+            exit 1
+          fi
+
+      - name: forsen
+        env:
+          XD: ${{ steps.build-type.outputs.NIGHTLY_BUILD }}
+          XD2: ${{ steps.build-type.FOO }}
+        run: |
+          echo "build type nightly build: ${{ steps.build-type.outputs.NIGHTLY_BUILD }}  - $XD $XD2 xD"
