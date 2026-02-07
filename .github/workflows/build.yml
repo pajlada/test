@@ -74,4 +74,4 @@ jobs:
           XD: ${{ steps.build-type.NIGHTLY_BUILD }}
           XD2: ${{ steps.build-type.FOO }}
         run: |
-          echo "build type nightly build: ${{ steps.build-type.NIGHTLY_BUILD }}  - $XD $XD2 xD"
+          echo "build type nightly build: ${{ steps.build-type.outputs.NIGHTLY_BUILD }}  - $XD $XD2 xD"
