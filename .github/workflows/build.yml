@@ -46,8 +46,10 @@ jobs:
       - name: Check build type
         id: build-type
         run: |
+          echo "asd: $GITHUB_OUTPUT"
           echo "Chatterino build type: aaaaa '${CHATTERINO_BUILD_TYPE}' bbbbbb"
           echo "FOO=BAR" >> "$GITHUB_OUTPUT"
+          echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
           if [ "${CHATTERINO_BUILD_TYPE}" = "auto" ]; then
             if git describe --exact-match --match 'v*'; then
               echo "Auto - found release tag format"
