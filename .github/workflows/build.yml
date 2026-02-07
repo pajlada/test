@@ -67,5 +67,7 @@ jobs:
           fi
 
       - name: forsen
+        env:
+          XD: ${{ steps.build-type.NIGHTLY_BUILD }}
         run: |
-          echo "build type nightly build: ${{ steps.build-type.NIGHTLY_BUILD }} xD"
+          echo "build type nightly build: ${{ steps.build-type.NIGHTLY_BUILD }}  - $XD xD"
