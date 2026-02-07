@@ -26,7 +26,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  CHATTERINO_BUILD_TYPE: ${{ case(inputs.buildType, inputs.buildType, 'auto') }}
+  CHATTERINO_BUILD_TYPE: ${{ case(inputs.buildType != '', inputs.buildType, 'auto') }}
 
 jobs:
   XD:
