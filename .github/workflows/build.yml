@@ -45,4 +45,4 @@ jobs:
 
       - name: Check build type
         run: |
-          echo "aaaaaaaa '${{ $CHATTERINO_BUILD_TYPE }}' bbbbbbb"
+          echo "aaaaaaaa '$CHATTERINO_BUILD_TYPE' bbbbbbb"
