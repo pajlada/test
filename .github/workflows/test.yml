@@ -13,12 +13,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: pajlada/test-github-action@master
-      id: review
+    - uses: actions/github-script@v8
       with:
-        post_comments: false
-
-    - uses: actions/upload-artifact@v3
-      with:
-        name: clang-tidy-review
-        path: clang_tidy_review.yaml
+        script: |
+          core.notice('hmm');
+          core.setFailed('hi this is the error message');
